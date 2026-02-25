@@ -29,7 +29,30 @@ app.post("/export", async (req, res) => {
     projectId
   });
 });
+// ==============================
+// TEST GENERATE ENDPOINT
+// ==============================
 
+app.post("/generate", async (req, res) => {
+  try {
+    const payload = req.body;
+
+    console.log("Generate job received:", payload);
+
+    return res.json({
+      ok: true,
+      received: payload,
+      at: new Date().toISOString(),
+    });
+
+  } catch (err) {
+    console.error("Generate error:", err);
+    return res.status(500).json({
+      ok: false,
+      error: "Server error"
+    });
+  }
+});
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
